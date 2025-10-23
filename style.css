@@ -16,28 +16,35 @@ footer {
   border-top: 1px solid #000;
 }
 
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
 .tagline {
   font-style: italic;
   margin-top: 5px;
 }
 
-main {
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
   padding: 20px;
 }
 
-h1, h2 {
-  margin: 0 0 15px 0;
+.category-tile {
+  display: block;
+  padding: 40px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #000;
+  transition: background 0.3s, color 0.3s;
+}
+
+.category-tile:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+main h2 {
+  margin-top: 0;
 }
 
 ul {
