@@ -1,7 +1,6 @@
-/* General styles */
 body {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #fff;
+  color: #000;
   font-family: "Times New Roman", Times, serif;
   margin: 0;
   padding: 0;
@@ -10,17 +9,17 @@ body {
 header, footer {
   text-align: center;
   padding: 20px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #000;
 }
 
 footer {
-  border-top: 1px solid #000000;
+  border-top: 1px solid #000;
 }
 
 nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: #000000;
+  color: #000;
   font-weight: bold;
 }
 
@@ -52,7 +51,7 @@ ul li {
 
 ul li a {
   text-decoration: none;
-  color: #000000;
+  color: #000;
 }
 
 ul li a:hover {
