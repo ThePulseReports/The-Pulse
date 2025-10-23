@@ -1,0 +1,60 @@
+/* General styles */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  margin: 0;
+  padding: 0;
+}
+
+header, footer {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #000000;
+}
+
+footer {
+  border-top: 1px solid #000000;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.tagline {
+  font-style: italic;
+  margin-top: 5px;
+}
+
+main {
+  padding: 20px;
+}
+
+h1, h2 {
+  margin: 0 0 15px 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #000000;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
