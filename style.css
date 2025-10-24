@@ -1,3 +1,4 @@
+/* Basic black-and-white styling */
 body {
   background-color: #fff;
   color: #000;
@@ -6,61 +7,92 @@ body {
   padding: 0;
 }
 
-header, footer {
+/* Header */
+header {
   text-align: center;
   padding: 20px;
   border-bottom: 1px solid #000;
 }
-
-footer {
-  border-top: 1px solid #000;
-}
-
-.tagline {
+header .tagline {
   font-style: italic;
   margin-top: 5px;
 }
 
-.categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* Top Navigation */
+.top-nav ul {
+  display: flex;
+  justify-content: center;
   gap: 20px;
-  padding: 20px;
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
 }
-
-.category-tile {
-  display: block;
-  padding: 40px 20px;
-  text-align: center;
+.top-nav ul li a {
   text-decoration: none;
   color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
   border: 1px solid #000;
   transition: background 0.3s, color 0.3s;
 }
-
-.category-tile:hover {
+.top-nav ul li a:hover {
   background-color: #000;
   color: #fff;
 }
 
-main h2 {
+/* Homepage sections */
+.homepage {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+}
+.category {
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+.category h2 {
   margin-top: 0;
 }
-
-ul {
-  list-style: none;
-  padding: 0;
+.preview {
+  display: none;
+  margin-top: 10px;
+}
+.category:hover .preview {
+  display: block;
+}
+.preview h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+.preview p {
+  font-size: 0.9em;
 }
 
-ul li {
-  margin: 10px 0;
-}
-
-ul li a {
-  text-decoration: none;
+/* About Us */
+.about-us {
+  padding: 20px;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  background-color: #f9f9f9;
   color: #000;
+  text-align: center;
+  margin: 40px 0;
+}
+.about-us h2 {
+  margin-bottom: 10px;
+}
+.about-us p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1em;
+  line-height: 1.5;
 }
 
-ul li a:hover {
-  text-decoration: underline;
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #000;
 }
