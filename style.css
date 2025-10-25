@@ -56,10 +56,6 @@ header .logo {
   color: #fff;
 }
 
-.hero.small-hero {
-  padding: 4rem 2rem;
-}
-
 /* Categories Grid */
 .category-grid {
   display: grid;
@@ -84,26 +80,67 @@ header .logo {
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
   padding: 2rem;
 }
 
 .member {
   background-color: #f8f8f8;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .member h3 {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .member p {
   color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 /* Sections */
 section {
-  padding:
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Contact Form */
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact input, .contact textarea {
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.contact button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #111;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contact button:hover {
+  background-color: #333;
+}
+
+/* Footer */
+footer {
+  padding: 2rem;
+  text-align: center;
+  background-color: #111;
+  color: #fff;
+}
