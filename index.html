@@ -1,79 +1,346 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Pulse | Home</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Pulse — Independent Student Journalism</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --dark-blue:#071a2b; --accent-blue:#0b3b66; --text-dark:#0b0b0b;
+      --muted:#6b7280; --white:#fff; --card-bg:#fff; --radius:12px;
+      --shadow:0 6px 18px rgba(11,27,45,0.12); --transition:220ms cubic-bezier(.2,.9,.2,1);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;color:var(--text-dark);background:#fafafa;line-height:1.45}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    /* Navigation */
+    .nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,0.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(11,27,45,0.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent-blue),var(--dark-blue));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:Playfair Display,serif}
+    .brand h1{margin:0;font-family:Playfair Display,serif;font-size:18px;color:var(--dark-blue)}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);font-weight:600;padding:8px 10px;border-radius:8px;transition:all var(--transition)}
+    nav a:hover{color:var(--dark-blue);background:rgba(11,27,45,0.04);transform:translateY(-2px)}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg, rgba(7,26,43,0.85), rgba(7,26,43,0.85)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6ebd4de5dbd2d5f0b7abe9f1a6e1643a') center/cover no-repeat;color:var(--white);padding:72px 0 64px}
+    .hero-inner{max-width:980px;margin:0 auto;padding:0 20px}
+    .eyebrow{display:inline-block;background:rgba(255,255,255,0.08);padding:6px 12px;border-radius:999px;font-size:13px;color:#dbeefe;margin-bottom:18px;font-weight:600}
+    .hero h2{margin:0 0 16px 0;font-family:Playfair Display,serif;font-size:40px;line-height:1.06;letter-spacing:-0.6px}
+    .lead{margin:0;font-size:18px;color:rgba(255,255,255,0.9)}
+
+    /* Sections */
+    section{padding:64px 0}
+    .section-title{display:flex;align-items:baseline;gap:12px;margin-bottom:28px}
+    .section-title h3{margin:0;font-family:Playfair Display,serif;font-size:22px;color:var(--dark-blue)}
+    .section-desc{color:var(--muted);font-size:14px}
+
+    /* Categories grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card-bg);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:transform var(--transition),box-shadow var(--transition);min-height:120px;display:flex;flex-direction:column;justify-content:center}
+    .card h4{margin:0 0 8px 0;font-family:Playfair Display,serif;color:var(--dark-blue);font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 12px 30px rgba(11,27,45,0.12)}
+
+    /* Team */
+    .team-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .member{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);transition:transform var(--transition),box-shadow var(--transition)}
+    .member:hover{transform:translateY(-6px);box-shadow:0 14px 34px rgba(11,27,45,0.12)}
+    .avatar{width:96px;height:96px;border-radius:999px;margin:0 auto 12px;overflow:hidden;background:#eef2f5;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--dark-blue);font-family:Playfair Display,serif;font-size:20px;box-shadow:0 6px 14px rgba(11,27,45,0.06)}
+    .member h5{margin:8px 0 2px 0;font-size:15px;color:var(--dark-blue)}
+    .role{margin:0;font-size:13px;color:var(--muted)}
+    .tagline{margin-top:8px;font-size:13px;color:var(--muted)}
+
+    /* About */
+    .about p{color:var(--muted);max-width:760px;font-size:15px}
+
+    /* Footer */
+    footer{background:var(--dark-blue);color:rgba(255,255,255,0.9);padding:28px 0}
+    footer .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1100px;margin:0 auto;padding:0 20px}
+    footer p{margin:0;font-size:14px;color:rgba(255,255,255,0.9)}
+
+    /* Responsive */
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}.team-wrapper{grid-template-columns:1fr}}
+    @media (max-width:680px){nav ul{display:none}.hero h2{font-size:30px}.grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}.section-title{flex-direction:column;align-items:flex-start;gap:6px}}
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="container header-container">
-    <div class="logo">
-      <h1>The Pulse</h1>
-      <p class="tagline">Independent Student Journalism</p>
+  <!-- Navigation -->
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">TP</div>
+        <h1>The Pulse</h1>
+      </div>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#join">Join Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="#join" style="padding:8px 12px;border-radius:8px;background:var(--accent-blue);color:var(--white);text-decoration:none">Apply</a>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="team.html">Our Team</a></li>
-        <li><a href="categories.html">Categories</a></li>
-        <li><a href="join.html">Join Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="container">
-    <h2>Knowledge that moves — stories that matter</h2>
-    <p>The Pulse is where information meets impact. We publish student journalism that educates, inspires, and challenges the status quo.</p>
-  </div>
-</section>
+  <!-- Hero -->
+  <main>
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <span class="eyebrow">Independent · Student-led</span>
+        <h2 id="hero-title">Knowledge that moves — stories that matter</h2>
+        <p class="lead">We publish student journalism that educates, inspires, and informs.</p>
+      </div>
+    </section>
 
-<!-- Categories -->
-<section id="categories" class="categories">
-  <div class="container">
-    <h2>Our Coverage</h2>
-    <div class="category-grid">
-      <a href="politics.html" class="category-card">
-        <h3>Politics</h3>
-        <p>Exploring civic leadership, policy shifts, and youth voices in government.</p>
-      </a>
-      <a href="business.html" class="category-card">
-        <h3>Business / Finance</h3>
-        <p>Breaking down markets, innovation, and the realities of the modern economy.</p>
-      </a>
-      <a href="health.html" class="category-card">
-        <h3>Health</h3>
-        <p>Covering physical, mental, and social well-being — from science to self-care.</p>
-      </a>
-      <a href="entertainment.html" class="category-card">
-        <h3>Entertainment</h3>
-        <p>Film, music, food, and culture — reviewed and reimagined by today’s students.</p>
-      </a>
-      <a href="science.html" class="category-card">
-        <h3>Science</h3>
-        <p>Highlighting discovery, innovation, and the people driving the future forward.</p>
-      </a>
-      <a href="crime.html" class="category-card">
-        <h3>Crime / Justice</h3>
-        <p>Reporting on fairness, accountability, and change within our communities.</p>
-      </a>
+    <!-- Categories -->
+    <section id="categories" class="container" aria-labelledby="cat-title">
+      <div class="section-title">
+        <h3 id="cat-title">Categories</h3>
+        <div class="section-desc">Coverage across campus and beyond — clear, concise, and careful reporting.</div>
+      </div>
+
+      <div class="grid" style="margin-bottom:6px;">
+        <article class="card" role="article" aria-labelledby="c-politics">
+          <h4 id="c-politics">Politics</h4>
+          <p>Examining policy, governance, and student government with balanced reporting.</p>
+        </article>
+
+        <article class="card" role="article" aria-labelledby="c-business">
+          <h4 id="c-business">Business / Finance</h4>
+          <p>Money matters — campus economics, budgeting, and financial literacy for students.</p>
+        </article>
+
+        <article class="card" role="article" aria-labelledby="c-health">
+          <h4 id="c-health">Health</h4>
+          <p>Reporting on wellness, public health, and mental health resources available to students.</p>
+        </article>
+
+        <article class="card" role="article" aria-labelledby="c-ent">
+          <h4 id="c-ent">Entertainment</h4>
+          <p>Culture, arts, reviews, and features on campus life and creative voices.</p>
+        </article>
+
+        <article class="card" role="article" aria-labelledby="c-science">
+          <h4 id="c-science">Science</h4>
+          <p>Bringing research and discovery into the wider student conversation.</p>
+        </article>
+
+        <article class="card" role="article" aria-labelledby="c-crime">
+          <h4 id="c-crime">Crime / Justice</h4>
+          <p>Responsible coverage of incidents, safety, and matters of legal consequence.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Our Team -->
+    <section id="team" class="container" aria-labelledby="team-title">
+      <div class="section-title">
+        <h3 id="team-title">Our Team</h3>
+        <div class="section-desc">A mix of editors, managers, and writers — all students committed to great journalism.</div>
+      </div>
+
+      <div class="team-wrapper" style="margin-bottom:12px">
+        <!-- Board Members -->
+        <div>
+          <h4 style="font-family:Playfair Display,serif;margin:0 0 12px 0;color:var(--dark-blue)">Board Members</h4>
+          <div class="team-grid">
+            <div class="member">
+              <div class="avatar">PR</div>
+              <h5>Pragna Rajashekar</h5>
+              <p class="role">Editor-in-Chief</p>
+              <p class="tagline">"Leading with rigor and curiosity."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">AC</div>
+              <h5>Adaria Crutcher</h5>
+              <p class="role">Managing Editor</p>
+              <p class="tagline">"Keeps deadlines friendly and fierce."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">SK</div>
+              <h5>Satvika Kodali</h5>
+              <p class="role">Social Media Manager</p>
+              <p class="tagline">"Makes stories go places."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">DN</div>
+              <h5>Dalena Ngo</h5>
+              <p class="role">Communication Director</p>
+              <p class="tagline">"Connects our newsroom to the world."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Writers by category -->
+        <div>
+          <h4 style="font-family:Playfair Display,serif;margin:0 0 12px 0;color:var(--dark-blue)">Writers</h4>
+          <div class="team-grid">
+            <!-- Politics -->
+            <div class="member">
+              <div class="avatar">EJ</div>
+              <h5>Emily Joseph</h5>
+              <p class="role">Politics</p>
+              <p class="tagline">"Asks the tough questions."</p>
+            </div>
+
+            <!-- Business/Finance -->
+            <div class="member">
+              <div class="avatar">MO</div>
+              <h5>Maritza Ortiz</h5>
+              <p class="role">Business / Finance</p>
+              <p class="tagline">"Makes numbers tell stories."</p>
+            </div>
+
+            <!-- Health -->
+            <div class="member">
+              <div class="avatar">—</div>
+              <h5>Health Desk</h5>
+              <p class="role">Health</p>
+              <p class="tagline">"Wellness coverage with care."</p>
+            </div>
+
+            <!-- Entertainment: movie/music/food reviews -->
+            <div class="member">
+              <div class="avatar">EF</div>
+              <h5>Elizabeth Fernando</h5>
+              <p class="role">Music Reviews</p>
+              <p class="tagline">"Covers the soundtrack of campus life."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">GV</div>
+              <h5>Grace Vipparthi</h5>
+              <p class="role">Food Reviews</p>
+              <p class="tagline">"Tastes and tells."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">—</div>
+              <h5>Adaria Crutcher</h5>
+              <p class="role">Movie Reviews</p>
+              <p class="tagline">"Film takes with fresh perspective."</p>
+            </div>
+
+            <!-- Science -->
+            <div class="member">
+              <div class="avatar">SR</div>
+              <h5>Samidha Roy</h5>
+              <p class="role">Science</p>
+              <p class="tagline">"Explains research clearly."</p>
+            </div>
+
+            <div class="member">
+              <div class="avatar">EM</div>
+              <h5>Esther Morrical</h5>
+              <p class="role">Science</p>
+              <p class="tagline">"Brings lab work to life."</p>
+            </div>
+
+            <!-- Crime/Justice -->
+            <div class="member">
+              <div class="avatar">RO</div>
+              <h5>Rebecca Opie-Espinoza</h5>
+              <p class="role">Crime / Justice</p>
+              <p class="tagline">"Covers safety and accountability."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="container about" aria-labelledby="about-title">
+      <div class="section-title">
+        <h3 id="about-title">About Us</h3>
+        <div class="section-desc">Who we are and what we stand for.</div>
+      </div>
+
+      <p>
+        The Pulse is your go-to source for thoughtful, accurate, and engaging news. We’re passionate about telling stories that matter—covering everything from local events to global issues, culture, and community voices. Our mission is to keep our readers informed, inspired, and empowered to make a difference.
+      </p>
+
+      <h4 style="font-family:Playfair Display,serif;margin-top:18px;color:var(--dark-blue)">Our Vision</h4>
+      <p>
+        We aim to be more than just a news source. Our vision is to create a platform where information meets insight—a place that fosters curiosity, critical thinking, and meaningful conversation. By delivering quality journalism with integrity and creativity, we strive to amplify voices, uncover hidden stories, and inspire action in our community and beyond.
+      </p>
+    </section>
+
+    <!-- Join -->
+    <section id="join" class="container" aria-labelledby="join-title">
+      <div class="section-title">
+        <h3 id="join-title">Join Us</h3>
+        <div class="section-desc">Contribute. Learn. Grow.</div>
+      </div>
+
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <p style="margin:0;color:var(--muted)">We welcome writers, photographers, designers, and editors. Ready to be part of The Pulse?</p>
+        <a class="btn" href="#contact" style="padding:10px 14px;border-radius:10px;background:var(--accent-blue);color:var(--white);text-decoration:none">Apply Now</a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container" aria-labelledby="contact-title">
+      <div class="section-title">
+        <h3 id="contact-title">Contact</h3>
+        <div class="section-desc">Send us a message or apply to join the team.</div>
+      </div>
+
+      <form class="contact" name="contact" method="post" action="#" novalidate style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:760px">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08)">
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08)">
+        </div>
+
+        <div style="grid-column:1/-1">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message or application here..." required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08);min-height:140px"></textarea>
+        </div>
+
+        <div style="grid-column:1/-1;display:flex;justify-content:flex-end">
+          <button type="submit" class="btn" style="padding:10px 14px;border-radius:10px;background:var(--accent-blue);color:var(--white);border:0">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="foot-inner container">
+      <p>The Pulse | Independent Student Journalism</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.72)">© <span id="year"></span> The Pulse</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <div class="container">
-    <p>&copy; 2025 The Pulse | Independent Student Journalism</p>
-  </div>
-</footer>
-
+  <script>
+    // footer year and demo contact submit handling
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelector('form.contact').addEventListener('submit', (e) => { e.preventDefault(); alert('Message sent (demo).'); e.target.reset(); });
+  </script>
 </body>
 </html>
