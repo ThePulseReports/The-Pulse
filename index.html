@@ -1,346 +1,559 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Pulse — Independent Student Journalism</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --dark-blue:#071a2b; --accent-blue:#0b3b66; --text-dark:#0b0b0b;
-      --muted:#6b7280; --white:#fff; --card-bg:#fff; --radius:12px;
-      --shadow:0 6px 18px rgba(11,27,45,0.12); --transition:220ms cubic-bezier(.2,.9,.2,1);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial;color:var(--text-dark);background:#fafafa;line-height:1.45}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:0 20px}
-
-    /* Navigation */
-    .nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,0.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(11,27,45,0.06)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:18px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent-blue),var(--dark-blue));display:flex;align-items:center;justify-content:center;color:var(--white);font-weight:700;font-family:Playfair Display,serif}
-    .brand h1{margin:0;font-family:Playfair Display,serif;font-size:18px;color:var(--dark-blue)}
-    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-    nav a{color:var(--muted);font-weight:600;padding:8px 10px;border-radius:8px;transition:all var(--transition)}
-    nav a:hover{color:var(--dark-blue);background:rgba(11,27,45,0.04);transform:translateY(-2px)}
-
-    /* Hero */
-    .hero{background:linear-gradient(180deg, rgba(7,26,43,0.85), rgba(7,26,43,0.85)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6ebd4de5dbd2d5f0b7abe9f1a6e1643a') center/cover no-repeat;color:var(--white);padding:72px 0 64px}
-    .hero-inner{max-width:980px;margin:0 auto;padding:0 20px}
-    .eyebrow{display:inline-block;background:rgba(255,255,255,0.08);padding:6px 12px;border-radius:999px;font-size:13px;color:#dbeefe;margin-bottom:18px;font-weight:600}
-    .hero h2{margin:0 0 16px 0;font-family:Playfair Display,serif;font-size:40px;line-height:1.06;letter-spacing:-0.6px}
-    .lead{margin:0;font-size:18px;color:rgba(255,255,255,0.9)}
-
-    /* Sections */
-    section{padding:64px 0}
-    .section-title{display:flex;align-items:baseline;gap:12px;margin-bottom:28px}
-    .section-title h3{margin:0;font-family:Playfair Display,serif;font-size:22px;color:var(--dark-blue)}
-    .section-desc{color:var(--muted);font-size:14px}
-
-    /* Categories grid */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card-bg);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:transform var(--transition),box-shadow var(--transition);min-height:120px;display:flex;flex-direction:column;justify-content:center}
-    .card h4{margin:0 0 8px 0;font-family:Playfair Display,serif;color:var(--dark-blue);font-size:18px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 12px 30px rgba(11,27,45,0.12)}
-
-    /* Team */
-    .team-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .member{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);transition:transform var(--transition),box-shadow var(--transition)}
-    .member:hover{transform:translateY(-6px);box-shadow:0 14px 34px rgba(11,27,45,0.12)}
-    .avatar{width:96px;height:96px;border-radius:999px;margin:0 auto 12px;overflow:hidden;background:#eef2f5;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--dark-blue);font-family:Playfair Display,serif;font-size:20px;box-shadow:0 6px 14px rgba(11,27,45,0.06)}
-    .member h5{margin:8px 0 2px 0;font-size:15px;color:var(--dark-blue)}
-    .role{margin:0;font-size:13px;color:var(--muted)}
-    .tagline{margin-top:8px;font-size:13px;color:var(--muted)}
-
-    /* About */
-    .about p{color:var(--muted);max-width:760px;font-size:15px}
-
-    /* Footer */
-    footer{background:var(--dark-blue);color:rgba(255,255,255,0.9);padding:28px 0}
-    footer .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1100px;margin:0 auto;padding:0 20px}
-    footer p{margin:0;font-size:14px;color:rgba(255,255,255,0.9)}
-
-    /* Responsive */
-    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}.team-wrapper{grid-template-columns:1fr}}
-    @media (max-width:680px){nav ul{display:none}.hero h2{font-size:30px}.grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}.section-title{flex-direction:column;align-items:flex-start;gap:6px}}
-  </style>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pulse - Student Journalism That Feels Alive</title>
+    <meta name="description" content="The Pulse stands for truth, creativity, and community. Student-written journalism that informs, inspires, and sparks conversation.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1a202c",
+                        secondary: "#2d3748",
+                        accent: "#1e40af"
+                    },
+                    fontFamily: {
+                        'serif': ['Georgia', 'Times New Roman', 'serif'],
+                        'sans': ['Helvetica Neue', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-
-  <!-- Navigation -->
-  <header class="nav" role="banner">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">TP</div>
-        <h1>The Pulse</h1>
-      </div>
-
-      <nav role="navigation" aria-label="Main navigation">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#team">Our Team</a></li>
-          <li><a href="#categories">Categories</a></li>
-          <li><a href="#join">Join Us</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div style="display:flex;gap:10px;align-items:center">
-        <a class="btn" href="#join" style="padding:8px 12px;border-radius:8px;background:var(--accent-blue);color:var(--white);text-decoration:none">Apply</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <main>
-    <section id="home" class="hero" aria-labelledby="hero-title">
-      <div class="hero-inner">
-        <span class="eyebrow">Independent · Student-led</span>
-        <h2 id="hero-title">Knowledge that moves — stories that matter</h2>
-        <p class="lead">We publish student journalism that educates, inspires, and informs.</p>
-      </div>
-    </section>
-
-    <!-- Categories -->
-    <section id="categories" class="container" aria-labelledby="cat-title">
-      <div class="section-title">
-        <h3 id="cat-title">Categories</h3>
-        <div class="section-desc">Coverage across campus and beyond — clear, concise, and careful reporting.</div>
-      </div>
-
-      <div class="grid" style="margin-bottom:6px;">
-        <article class="card" role="article" aria-labelledby="c-politics">
-          <h4 id="c-politics">Politics</h4>
-          <p>Examining policy, governance, and student government with balanced reporting.</p>
-        </article>
-
-        <article class="card" role="article" aria-labelledby="c-business">
-          <h4 id="c-business">Business / Finance</h4>
-          <p>Money matters — campus economics, budgeting, and financial literacy for students.</p>
-        </article>
-
-        <article class="card" role="article" aria-labelledby="c-health">
-          <h4 id="c-health">Health</h4>
-          <p>Reporting on wellness, public health, and mental health resources available to students.</p>
-        </article>
-
-        <article class="card" role="article" aria-labelledby="c-ent">
-          <h4 id="c-ent">Entertainment</h4>
-          <p>Culture, arts, reviews, and features on campus life and creative voices.</p>
-        </article>
-
-        <article class="card" role="article" aria-labelledby="c-science">
-          <h4 id="c-science">Science</h4>
-          <p>Bringing research and discovery into the wider student conversation.</p>
-        </article>
-
-        <article class="card" role="article" aria-labelledby="c-crime">
-          <h4 id="c-crime">Crime / Justice</h4>
-          <p>Responsible coverage of incidents, safety, and matters of legal consequence.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- Our Team -->
-    <section id="team" class="container" aria-labelledby="team-title">
-      <div class="section-title">
-        <h3 id="team-title">Our Team</h3>
-        <div class="section-desc">A mix of editors, managers, and writers — all students committed to great journalism.</div>
-      </div>
-
-      <div class="team-wrapper" style="margin-bottom:12px">
-        <!-- Board Members -->
-        <div>
-          <h4 style="font-family:Playfair Display,serif;margin:0 0 12px 0;color:var(--dark-blue)">Board Members</h4>
-          <div class="team-grid">
-            <div class="member">
-              <div class="avatar">PR</div>
-              <h5>Pragna Rajashekar</h5>
-              <p class="role">Editor-in-Chief</p>
-              <p class="tagline">"Leading with rigor and curiosity."</p>
+<body class="min-h-screen bg-white font-sans">
+    <!-- Header & Navigation -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-3 h-8 bg-blue-700"></div>
+                    <h1 class="text-2xl font-bold text-gray-900 font-serif">THE PULSE</h1>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Home</a>
+                    <a href="#politics" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Politics</a>
+                    <a href="#business" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Business</a>
+                    <a href="#health" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Health</a>
+                    <a href="#entertainment" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Entertainment</a>
+                    <a href="#science" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Science</a>
+                    <a href="#crime" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Crime</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">About</a>
+                    <a href="#team" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Team</a>
+                    <a href="#join" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Join Us</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-700 font-medium transition-colors">Contact</a>
+                </nav>
+                
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
-
-            <div class="member">
-              <div class="avatar">AC</div>
-              <h5>Adaria Crutcher</h5>
-              <p class="role">Managing Editor</p>
-              <p class="tagline">"Keeps deadlines friendly and fierce."</p>
-            </div>
-
-            <div class="member">
-              <div class="avatar">SK</div>
-              <h5>Satvika Kodali</h5>
-              <p class="role">Social Media Manager</p>
-              <p class="tagline">"Makes stories go places."</p>
-            </div>
-
-            <div class="member">
-              <div class="avatar">DN</div>
-              <h5>Dalena Ngo</h5>
-              <p class="role">Communication Director</p>
-              <p class="tagline">"Connects our newsroom to the world."</p>
-            </div>
-          </div>
         </div>
+    </header>
 
-        <!-- Writers by category -->
-        <div>
-          <h4 style="font-family:Playfair Display,serif;margin:0 0 12px 0;color:var(--dark-blue)">Writers</h4>
-          <div class="team-grid">
-            <!-- Politics -->
-            <div class="member">
-              <div class="avatar">EJ</div>
-              <h5>Emily Joseph</h5>
-              <p class="role">Politics</p>
-              <p class="tagline">"Asks the tough questions."</p>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="bg-gray-50 py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Featured Story -->
+                    <div class="lg:col-span-2">
+                        <article class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <img 
+                                src="https://picsum.photos/800/500?random=1" 
+                                alt="Featured news story" 
+                                class="w-full h-64 object-cover"
+                                loading="lazy"
+                            />
+                            <div class="p-6">
+                                <span class="text-blue-700 text-sm font-medium uppercase tracking-wide">Breaking News</span>
+                                <h2 class="text-2xl font-bold text-gray-900 mt-2 font-serif">Major Development in Local Politics Shakes Community</h2>
+                                <p class="text-gray-600 mt-3">In-depth analysis of recent political changes and their impact on student communities across the region.</p>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>By Pragna Rajashekar</span>
+                                    <span class="mx-2">•</span>
+                                    <span>March 15, 2024</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <!-- Top Stories Sidebar -->
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-bold text-gray-900 border-b pb-2">Top Stories</h3>
+                        <div class="space-y-4">
+                            <article class="flex space-x-4">
+                                <img 
+                                    src="https://picsum.photos/100/80?random=2" 
+                                    alt="Business news thumbnail" 
+                                    class="w-20 h-16 object-cover rounded"
+                                    loading="lazy"
+                                />
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm">Market Trends Show Student Entrepreneurship Rising</h4>
+                                    <span class="text-xs text-gray-500">Business • 2h ago</span>
+                                </div>
+                            </article>
+                            <article class="flex space-x-4">
+                                <img 
+                                    src="https://picsum.photos/100/80?random=3" 
+                                    alt="Health news thumbnail" 
+                                    class="w-20 h-16 object-cover rounded"
+                                    loading="lazy"
+                                />
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm">New Study Reveals Impact of Sleep on Academic Performance</h4>
+                                    <span class="text-xs text-gray-500">Health • 4h ago</span>
+                                </div>
+                            </article>
+                            <article class="flex space-x-4">
+                                <img 
+                                    src="https://picsum.photos/100/80?random=4" 
+                                    alt="Science news thumbnail" 
+                                    class="w-20 h-16 object-cover rounded"
+                                    loading="lazy"
+                                />
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm">Breakthrough in Renewable Energy Research</h4>
+                                    <span class="text-xs text-gray-500">Science • 6h ago</span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Business/Finance -->
-            <div class="member">
-              <div class="avatar">MO</div>
-              <h5>Maritza Ortiz</h5>
-              <p class="role">Business / Finance</p>
-              <p class="tagline">"Makes numbers tell stories."</p>
+        <!-- Category Sections -->
+        <section id="politics" class="py-12 border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold text-gray-900 mb-8 font-serif">Politics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Politics articles would go here -->
+                    <article class="bg-white rounded-lg shadow-sm border border-gray-100">
+                        <img 
+                            src="https://picsum.photos/400/250?random=5" 
+                            alt="Political analysis" 
+                            class="w-full h-48 object-cover rounded-t-lg"
+                            loading="lazy"
+                        />
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-900">Student Government Elections: What You Need to Know</h3>
+                            <p class="text-gray-600 text-sm mt-2">Comprehensive guide to upcoming campus elections and candidate platforms.</p>
+                        </div>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <!-- Health -->
-            <div class="member">
-              <div class="avatar">—</div>
-              <h5>Health Desk</h5>
-              <p class="role">Health</p>
-              <p class="tagline">"Wellness coverage with care."</p>
+        <!-- About Us Section -->
+        <section id="about" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center font-serif">About The Pulse</h2>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Our Vision</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            To create journalism that feels alive. We want our words to inform, inspire, and spark conversation. 
+                            The Pulse stands for truth, creativity, and community — a place where facts guide the story, not opinions.
+                        </p>
+                        
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            We're a collective of students with different voices but the same purpose. We write, edit, design, 
+                            and report because we care about stories that matter. Our work is grounded in accuracy, curiosity, and fairness.
+                        </p>
+                        
+                        <p class="text-gray-700 leading-relaxed">
+                            The Pulse is student written and student led. We tell stories that move, question, and connect. 
+                            Every piece reflects our generation and the world we're shaping — without agendas, bias, or politics. 
+                            Just perspectives, facts, and honesty.
+                        </p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Entertainment: movie/music/food reviews -->
-            <div class="member">
-              <div class="avatar">EF</div>
-              <h5>Elizabeth Fernando</h5>
-              <p class="role">Music Reviews</p>
-              <p class="tagline">"Covers the soundtrack of campus life."</p>
+        <!-- Team Section -->
+        <section id="team" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center font-serif">Our Team</h2>
+                
+                <!-- Board Members -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Our Board</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/128?random=10" 
+                                    alt="Pragna Rajashekar" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-bold text-gray-900">Pragna Rajashekar</h4>
+                            <p class="text-blue-700 font-medium">Editor-In-Chief</p>
+                            <p class="text-gray-600 text-sm">Memphis, TN</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/128?random=11" 
+                                    alt="Adaria Crutcher" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-bold text-gray-900">Adaria Crutcher</h4>
+                            <p class="text-blue-700 font-medium">Managing Editor</p>
+                            <p class="text-gray-600 text-sm">Memphis, TN</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/128?random=12" 
+                                    alt="Dalena Ngo" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-bold text-gray-900">Dalena Ngo</h4>
+                            <p class="text-blue-700 font-medium">Communications Director</p>
+                            <p class="text-gray-600 text-sm">Memphis, TN</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/128?random=13" 
+                                    alt="Satvika Kodali" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-bold text-gray-900">Satvika Kodali</h4>
+                            <p class="text-blue-700 font-medium">Social Media Manager</p>
+                            <p class="text-gray-600 text-sm">Memphis, TN</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/128?random=14" 
+                                    alt="Ellen Lei" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-bold text-gray-900">Ellen Lei</h4>
+                            <p class="text-blue-700 font-medium">Operations Director</p>
+                            <p class="text-gray-600 text-sm">Memphis, TN</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Writers & Editors -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Writers & Editors</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=15" 
+                                    alt="Maritza Ortiz" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Maritza Ortiz</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=16" 
+                                    alt="Samidha Roy" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Samidha Roy</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=17" 
+                                    alt="Elizabeth Fernando" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Elizabeth Fernando</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=18" 
+                                    alt="Grace Vipparthi" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Grace Vipparthi</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=19" 
+                                    alt="Rebecca Opie-Espinoza" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Rebecca Opie-Espinoza</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=20" 
+                                    alt="Esther Morrical" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Esther Morrical</h4>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-3 overflow-hidden">
+                                <img 
+                                    src="https://picsum.photos/80?random=21" 
+                                    alt="Victoria Jacobs" 
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <h4 class="font-semibold text-gray-900 text-sm">Victoria Jacobs</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="member">
-              <div class="avatar">GV</div>
-              <h5>Grace Vipparthi</h5>
-              <p class="role">Food Reviews</p>
-              <p class="tagline">"Tastes and tells."</p>
+        <!-- Join Us Section -->
+        <section id="join" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center font-serif">Join Our Team</h2>
+                    
+                    <form class="bg-white rounded-lg shadow-md p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" id="firstName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" id="lastName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="role" class="block text-sm font-medium text-gray-700 mb-2">Role Interest</label>
+                            <select id="role" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                                <option value="">Select a role</option>
+                                <option value="writer">Writer</option>
+                                <option value="editor">Editor</option>
+                                <option value="photographer">Photographer</option>
+                                <option value="designer">Designer</option>
+                                <option value="social-media">Social Media</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Experience & Interest</label>
+                            <textarea id="experience" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700" placeholder="Tell us about your experience and why you want to join The Pulse..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-700 text-white py-3 px-4 rounded-md hover:bg-blue-800 transition-colors font-medium">
+                            Submit Application
+                        </button>
+                    </form>
+                </div>
             </div>
+        </section>
 
-            <div class="member">
-              <div class="avatar">—</div>
-              <h5>Adaria Crutcher</h5>
-              <p class="role">Movie Reviews</p>
-              <p class="tagline">"Film takes with fresh perspective."</p>
+        <!-- Contact Section -->
+        <section id="contact" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center font-serif">Contact Us</h2>
+                    
+                    <form class="bg-white rounded-lg shadow-md p-8">
+                        <div class="mb-6">
+                            <label for="contactName" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="contactName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="contactEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="contactEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700" placeholder="Your message..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-700 text-white py-3 px-4 rounded-md hover:bg-blue-800 transition-colors font-medium">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Science -->
-            <div class="member">
-              <div class="avatar">SR</div>
-              <h5>Samidha Roy</h5>
-              <p class="role">Science</p>
-              <p class="tagline">"Explains research clearly."</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-3 h-8 bg-blue-700"></div>
+                        <h3 class="text-xl font-bold font-serif">THE PULSE</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Student journalism that informs, inspires, and sparks conversation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#politics" class="hover:text-white transition-colors">Politics</a></li>
+                        <li><a href="#business" class="hover:text-white transition-colors">Business</a></li>
+                        <li><a href="#health" class="hover:text-white transition-colors">Health</a></li>
+                        <li><a href="#entertainment" class="hover:text-white transition-colors">Entertainment</a></li>
+                        <li><a href="#science" class="hover:text-white transition-colors">Science</a></li>
+                        <li><a href="#crime" class="hover:text-white transition-colors">Crime</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">About</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#team" class="hover:text-white transition-colors">Our Team</a></li>
+                        <li><a href="#join" class="hover:text-white transition-colors">Join Us</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <div class="member">
-              <div class="avatar">EM</div>
-              <h5>Esther Morrical</h5>
-              <p class="role">Science</p>
-              <p class="tagline">"Brings lab work to life."</p>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 The Pulse. All rights reserved. Student-written journalism.</p>
             </div>
-
-            <!-- Crime/Justice -->
-            <div class="member">
-              <div class="avatar">RO</div>
-              <h5>Rebecca Opie-Espinoza</h5>
-              <p class="role">Crime / Justice</p>
-              <p class="tagline">"Covers safety and accountability."</p>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="container about" aria-labelledby="about-title">
-      <div class="section-title">
-        <h3 id="about-title">About Us</h3>
-        <div class="section-desc">Who we are and what we stand for.</div>
-      </div>
-
-      <p>
-        The Pulse is your go-to source for thoughtful, accurate, and engaging news. We’re passionate about telling stories that matter—covering everything from local events to global issues, culture, and community voices. Our mission is to keep our readers informed, inspired, and empowered to make a difference.
-      </p>
-
-      <h4 style="font-family:Playfair Display,serif;margin-top:18px;color:var(--dark-blue)">Our Vision</h4>
-      <p>
-        We aim to be more than just a news source. Our vision is to create a platform where information meets insight—a place that fosters curiosity, critical thinking, and meaningful conversation. By delivering quality journalism with integrity and creativity, we strive to amplify voices, uncover hidden stories, and inspire action in our community and beyond.
-      </p>
-    </section>
-
-    <!-- Join -->
-    <section id="join" class="container" aria-labelledby="join-title">
-      <div class="section-title">
-        <h3 id="join-title">Join Us</h3>
-        <div class="section-desc">Contribute. Learn. Grow.</div>
-      </div>
-
-      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
-        <p style="margin:0;color:var(--muted)">We welcome writers, photographers, designers, and editors. Ready to be part of The Pulse?</p>
-        <a class="btn" href="#contact" style="padding:10px 14px;border-radius:10px;background:var(--accent-blue);color:var(--white);text-decoration:none">Apply Now</a>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="container" aria-labelledby="contact-title">
-      <div class="section-title">
-        <h3 id="contact-title">Contact</h3>
-        <div class="section-desc">Send us a message or apply to join the team.</div>
-      </div>
-
-      <form class="contact" name="contact" method="post" action="#" novalidate style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:760px">
-        <div>
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08)">
-        </div>
-
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08)">
-        </div>
-
-        <div style="grid-column:1/-1">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Write your message or application here..." required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,27,45,0.08);min-height:140px"></textarea>
-        </div>
-
-        <div style="grid-column:1/-1;display:flex;justify-content:flex-end">
-          <button type="submit" class="btn" style="padding:10px 14px;border-radius:10px;background:var(--accent-blue);color:var(--white);border:0">Submit</button>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <div class="foot-inner container">
-      <p>The Pulse | Independent Student Journalism</p>
-      <p style="font-size:13px;color:rgba(255,255,255,0.72)">© <span id="year"></span> The Pulse</p>
-    </div>
-  </footer>
-
-  <script>
-    // footer year and demo contact submit handling
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.querySelector('form.contact').addEventListener('submit', (e) => { e.preventDefault(); alert('Message sent (demo).'); e.target.reset(); });
-  </script>
+    </footer>
+    
+    <script>
+        // Define navigation data
+        const navigationItems = [
+            { "id": 1, "label": "Home", "href": "#home" },
+            { "id": 2, "label": "Politics", "href": "#politics" },
+            { "id": 3, "label": "Business", "href": "#business" },
+            { "id": 4, "label": "Health", "href": "#health" },
+            { "id": 5, "label": "Entertainment", "href": "#entertainment" },
+            { "id": 6, "label": "Science", "href": "#science" },
+            { "id": 7, "label": "Crime", "href": "#crime" },
+            { "id": 8, "label": "About", "href": "#about" },
+            { "id": 9, "label": "Team", "href": "#team" },
+            { "id": 10, "label": "Join Us", "href": "#join" },
+            { "id": 11, "label": "Contact", "href": "#contact" }
+        ];
+        
+        // Prevent default anchor behavior and implement smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Form submission handlers
+            const joinForm = document.querySelector('#join form');
+            const contactForm = document.querySelector('#contact form');
+            
+            if (joinForm) {
+                joinForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your interest in joining The Pulse! We will review your application and get back to you soon.');
+                    this.reset();
+                });
+            }
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you as soon as possible.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
